@@ -1,0 +1,1 @@
+source ~/ve1/bin/activate
