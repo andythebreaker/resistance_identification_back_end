@@ -42,21 +42,28 @@ for i in range(0, 100):
     ret, frame = cap.read()
     #[REF]https://stackoverflow.com/questions/19181485/splitting-image-using-opencv-in-python
     b,g,r = cv2.split(frame)
+    #b
     #[REF]https://opencv24-python-tutorials.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_features_harris/py_features_harris.html
     gray = np.float32(b)
     dst = cv2.cornerHarris(gray,2,3,0.04)
     #result is dilated for marking the corners, not important
     dst = cv2.dilate(dst,None)
+    #[REF]https://shengyu7697.github.io/python-opencv-threshold/
+    ret, dst = cv2.threshold(dst,0.01*dst.max(),255,0)
     img_arrayB.append(dst)
+    #r
     gray = np.float32(r)
     dst = cv2.cornerHarris(gray,2,3,0.04)
     #result is dilated for marking the corners, not important
     dst = cv2.dilate(dst,None)
+    ret, dst = cv2.threshold(dst,0.01*dst.max(),255,0)
     img_arrayR.append(dst)
+    #g
     gray = np.float32(g)
     dst = cv2.cornerHarris(gray,2,3,0.04)
     #result is dilated for marking the corners, not important
     dst = cv2.dilate(dst,None)
+    ret, dst = cv2.threshold(dst,0.01*dst.max(),255,0)
     img_arrayG.append(dst)
     #print(dst)
     #print(type(frame))
